@@ -128,14 +128,14 @@ void loop() // holy shit bro ... rewrite!!!
     analogRaw = analogRead(READ_PIN);
     if (analogRaw <= 3)
       break;
-    sendLedData(analogRaw, opMode);
+    sendLedData(opMode, analogRaw);
     break;
   case 2:
-    sendLedData(0, opMode);
+    sendLedData(opMode, 0);
     delay(10);
     break;
   case 3:
-    sendLedData(0, opMode);
+    sendLedData(opMode, 0);
     delay(10);
     break;
   }
@@ -181,7 +181,7 @@ void clicked() // need rewrite
   Serial.printf("Setting opmode %d \n", opMode);
 }
 
-void sendLedData(uint32_t data, uint8_t op_mode) // however ...
+void sendLedData(uint8_t op_mode, uint32_t data) // however ...
 {
   struct led_command send_data;
   send_data.opmode = op_mode;

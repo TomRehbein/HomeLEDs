@@ -26,6 +26,8 @@ void loop()
   for(int dot = 0; dot < NUM_LEDS; dot++) { 
     leds[dot] = CRGB::White;  
     FastLED.show();
-    //leds[dot] = CRGB::Green;
+    leds[dot] = CRGB::Green;
+    //leds[dot] = CRGB::Black;
+    delay(10);
   } 
 }
