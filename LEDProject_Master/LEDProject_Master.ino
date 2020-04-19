@@ -8,11 +8,11 @@
 
 #define NUMBER_OF_CLIENTS 1 // change to real num
 bool heartbeats[NUMBER_OF_CLIENTS];
-static int opMode = 1; // don´t n if needed
+const int numOpModes = 3;
+static int opMode = 1;
 
 const int checkDelay = 5000;
 const int buttonDoubleTapDelay = 200; // don´t no if needed
-const int numOpModes = 3;             // don´t no if needed
 
 unsigned long lastChecked; // hole block - don´t no if needed
 unsigned long buttonChecked;
@@ -109,11 +109,11 @@ bool checkHeartBeats()
 
 // ------- loop start -------
 
-void loop() // holy shit bro ... rewrite!!!
+void loop()
 {
-  uint32_t analogRaw;
   buttonCheck();
-  if (millis() - lastChecked > checkDelay)
+
+  if (millis() - lastChecked > checkDelay) // is this needed?
   {
     if (!checkHeartBeats())
     {
@@ -122,23 +122,15 @@ void loop() // holy shit bro ... rewrite!!!
     lastChecked = millis();
   }
 
-  switch (opMode)
+  uint32_t Data = 0;
+
+  if (opMode == 2)
   {
-  case 1:
-    analogRaw = analogRead(READ_PIN);
-    if (analogRaw <= 3)
-      break;
-    sendLedData(opMode, analogRaw);
-    break;
-  case 2:
-    sendLedData(opMode, 0);
-    delay(10);
-    break;
-  case 3:
-    sendLedData(opMode, 0);
-    delay(10);
-    break;
+    Data = analogRead(READ_PIN);
   }
+
+  sendLedData(opMode, Data);
+
   delay(4);
 }
 
