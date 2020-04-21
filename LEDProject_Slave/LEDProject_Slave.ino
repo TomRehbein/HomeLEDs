@@ -65,8 +65,6 @@ void setup()
   {
   }
 
-  FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);
-
   Serial.begin(115200); // Start the Serial communication to send messages to the computer
   delay(10);
   Serial.println('\n');

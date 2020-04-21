@@ -14,7 +14,7 @@ static int opMode = 1;
 const int checkDelay = 5000;
 const int buttonDoubleTapDelay = 200; // don´t no if needed
 
-unsigned long lastChecked; // hole block - don´t no if needed
+unsigned long lastChecked; // hole block - don´t no if needed -> for button
 unsigned long buttonChecked;
 bool buttonClicked = false;
 bool queueDouble = false;
@@ -40,14 +40,20 @@ void setup()
   Serial.begin(115200);
   Serial.println();
   Serial.print("Setting soft-AP ... ");
+
   WiFi.persistent(false);
   WiFi.mode(WIFI_AP);
   WiFi.softAP("TTTArduinoWiFi", "KmwcjaDYuKPKEVrN");
+
   Serial.print("Soft-AP IP address = ");
   Serial.println(WiFi.softAPIP());
+
   UDP.begin(7171);
+
   resetHeartBeats(); // check from here on
+
   waitForConnections();
+
   lastChecked = millis();
   buttonChecked = 0;
 }
@@ -65,10 +71,12 @@ void waitForConnections()
   while (true)
   {
     readHeartBeat();
+
     if (checkHeartBeats())
     {
       return;
     }
+
     delay(checkDelay);
     resetHeartBeats();
   }
@@ -77,19 +85,24 @@ void waitForConnections()
 void readHeartBeat() // maybe rewrite
 {
   struct heartbeat_message hbm;
+
   while (true)
   {
     int packetSize = UDP.parsePacket();
+
     if (!packetSize)
     {
       break;
     }
+
     UDP.read((char *)&hbm, sizeof(struct heartbeat_message));
+
     if (hbm.client_id > NUMBER_OF_CLIENTS)
     {
       Serial.println("Error: invalid client_id received");
       continue;
     }
+
     heartbeats[hbm.client_id - 1] = true;
   }
 }
@@ -103,6 +116,7 @@ bool checkHeartBeats()
       return false;
     }
   }
+
   resetHeartBeats();
   return true;
 }
@@ -119,6 +133,7 @@ void loop()
     {
       waitForConnections();
     }
+
     lastChecked = millis();
   }
 
