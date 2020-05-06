@@ -1,0 +1,42 @@
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+button {
+  width: 80px;
+  height: 22px;
+  margin: 5px;
+  font-size: 13px;
+}
+
+input {
+  font-size: 12px;
+}
+
+#Schlafzimmer {
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+
+#Wohnzimmer {
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+
+#Kueche {
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+
+#Bad {
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
