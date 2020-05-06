@@ -15,6 +15,25 @@ button {
 
 input {
   font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.R {
+  background-color: red;
+}
+
+.G {
+  background-color: green;
+}
+
+.B {
+  background-color: blue;
+}
+
+.W {
+  background-color: white;
+  color: black;
 }
 
 #Schlafzimmer {
